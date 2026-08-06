@@ -6,25 +6,31 @@ import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ChatServiceImpl implements ChatService{
 
     private final ChatClient chatClient;
+    private  VectorStore vectorStore;
 
     @Value("classpath:prompt/userPrompt.st")
     private Resource userPrompt;
 
-    public ChatServiceImpl(ChatClient chatClient)
+    public ChatServiceImpl(ChatClient chatClient, VectorStore vectorStore)
     {
         super();
         this.chatClient = chatClient;
+        this.vectorStore = vectorStore;
     }
 
     public String chat(String q, String userId) {
@@ -75,6 +81,14 @@ public class ChatServiceImpl implements ChatService{
                 .user(user -> user.text(this.userPrompt).param("Topic", query))
                 .stream()
                 .content();
+    }
+
+    @Override
+    public void savedData(List<String> list) {
+
+        List<Document> collect = list.stream().map(Document::new).toList();
+
+        this.vectorStore.add(collect);
     }
 
 }

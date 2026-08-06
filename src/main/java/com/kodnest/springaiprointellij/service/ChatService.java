@@ -2,6 +2,8 @@ package com.kodnest.springaiprointellij.service;
 
 import reactor.core.publisher.Flux;
 
+import java.util.List;
+
 public interface ChatService {
 
     public String chat(String q, String userId);
@@ -9,6 +11,8 @@ public interface ChatService {
     public String chatTemplate();
 
     Flux<String> streamTemplate(String query);
+
+    void savedData(List<String> list);
 
 
 }
