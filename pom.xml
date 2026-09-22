@@ -50,11 +50,16 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.mysql</groupId>
-			<artifactId>mysql-connector-j</artifactId>
-			<version>8.3.0</version>
-			<scope>compile</scope>
+			<groupId>org.springframework.ai</groupId>
+			<artifactId>spring-ai-pdf-document-reader</artifactId>
 		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>com.mysql</groupId>-->
+<!--			<artifactId>mysql-connector-j</artifactId>-->
+<!--			<version>8.3.0</version>-->
+<!--			<scope>compile</scope>-->
+<!--		</dependency>-->
 <!--To Implement the Rag we have to use these dependencies-->
 		<dependency>
 			<groupId>org.springframework.ai</groupId>

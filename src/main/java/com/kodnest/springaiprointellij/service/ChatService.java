@@ -14,5 +14,7 @@ public interface ChatService {
 
     void savedData(List<String> list);
 
+    public String chatQ(String q, String conversation);
+
 
 }

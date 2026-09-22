@@ -32,4 +32,9 @@ public class ChatController {
     public Flux<String> streamTemplate(@RequestParam("q") String query) {
         return chatService.streamTemplate(query);
     }
+
+    @GetMapping("ChatQuery")
+    public String chatQ(@RequestParam String q, @RequestHeader("conversationId") String conversationId) {
+        return chatService.chatQ(q, conversationId);
+    }
 }
